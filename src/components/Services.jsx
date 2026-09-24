@@ -16,6 +16,22 @@ function ServiceList({ title, items }) {
   );
 }
 
+const SPECIES_TITLES = { dog: "Dogs", cat: "Cats" };
+
+// One card per `group` (or per species when items have no group), in the
+// order they first appear in config.
+function groupServices() {
+  const groups = new Map();
+  for (const [species, items] of Object.entries(salon.services)) {
+    for (const item of items) {
+      const title = item.group ?? SPECIES_TITLES[species];
+      if (!groups.has(title)) groups.set(title, []);
+      groups.get(title).push(item);
+    }
+  }
+  return [...groups];
+}
+
 export default function Services() {
   return (
     <section id="services" className="services-section">
@@ -28,8 +44,9 @@ export default function Services() {
         </div>
 
         <div className="service-groups">
-          <ServiceList title="Dogs" items={salon.services.dog} />
-          <ServiceList title="Cats" items={salon.services.cat} />
+          {groupServices().map(([title, items]) => (
+            <ServiceList key={title} title={title} items={items} />
+          ))}
         </div>
       </div>
     </section>

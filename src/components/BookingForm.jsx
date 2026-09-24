@@ -28,6 +28,11 @@ function isClosedOn(dateStr) {
   return !entry || !entry.open;
 }
 
+// Salons that only groom dogs leave `cat` out of config.services.
+function hasSpecies(species) {
+  return Boolean(salon.services[species]?.length);
+}
+
 function dayName(dateStr) {
   return new Date(`${dateStr}T12:00:00`).toLocaleDateString("en-US", { weekday: "long" });
 }
@@ -205,33 +210,35 @@ export default function BookingForm() {
   return (
     <form className="booking-form" onSubmit={handleSubmit} noValidate>
       <div className="field-grid">
-        <div className="toggle-group">
-          <span className="toggle-group__label">Your pet is a</span>
-          <div className="toggle-group__row">
-            <button
-              type="button"
-              className="toggle-btn"
-              aria-pressed={species === "dog"}
-              onClick={() => {
-                setSpecies("dog");
-                setSizeIndex(null);
-              }}
-            >
-              Dog
-            </button>
-            <button
-              type="button"
-              className="toggle-btn"
-              aria-pressed={species === "cat"}
-              onClick={() => {
-                setSpecies("cat");
-                setSizeIndex(null);
-              }}
-            >
-              Cat
-            </button>
+        {hasSpecies("cat") && (
+          <div className="toggle-group">
+            <span className="toggle-group__label">Your pet is a</span>
+            <div className="toggle-group__row">
+              <button
+                type="button"
+                className="toggle-btn"
+                aria-pressed={species === "dog"}
+                onClick={() => {
+                  setSpecies("dog");
+                  setSizeIndex(null);
+                }}
+              >
+                Dog
+              </button>
+              <button
+                type="button"
+                className="toggle-btn"
+                aria-pressed={species === "cat"}
+                onClick={() => {
+                  setSpecies("cat");
+                  setSizeIndex(null);
+                }}
+              >
+                Cat
+              </button>
+            </div>
           </div>
-        </div>
+        )}
 
         <div className="toggle-group">
           <span className="toggle-group__label">First visit with us?</span>
@@ -346,10 +353,9 @@ export default function BookingForm() {
           Preferred drop-off
           <select id="time" value={fields.time} onChange={(e) => setField("time", e.target.value)}>
             <option value="Any time">Any time</option>
-            <option value="8–10 am">8–10 am</option>
-            <option value="10 am–12 pm">10 am–12 pm</option>
-            <option value="12–2 pm">12–2 pm</option>
-            <option value="2–4 pm">2–4 pm</option>
+            <option value="9–11 am">9–11 am</option>
+            <option value="11 am–1 pm">11 am–1 pm</option>
+            <option value="1–3 pm">1–3 pm</option>
           </select>
         </label>
       </div>

@@ -18,29 +18,31 @@ export default function Reviews() {
             <span className="section-label">Google reviews</span>
             <h2 className="section-title">What pet parents say</h2>
           </div>
-          <div className="reviews-nav">
-            <button
-              type="button"
-              className="review-arrow"
-              aria-label="Previous reviews"
-              onClick={() => scroll(-1)}
-            >
-              ←
-            </button>
-            <button
-              type="button"
-              className="review-arrow"
-              aria-label="Next reviews"
-              onClick={() => scroll(1)}
-            >
-              →
-            </button>
-          </div>
+          {salon.reviews.length > 1 && (
+            <div className="reviews-nav">
+              <button
+                type="button"
+                className="review-arrow"
+                aria-label="Previous reviews"
+                onClick={() => scroll(-1)}
+              >
+                ←
+              </button>
+              <button
+                type="button"
+                className="review-arrow"
+                aria-label="Next reviews"
+                onClick={() => scroll(1)}
+              >
+                →
+              </button>
+            </div>
+          )}
         </div>
 
         <div className="reviews-track" ref={trackRef}>
-          {salon.reviews.map((review) => (
-            <figure className="review-card" key={review.name + review.when}>
+          {salon.reviews.map((review, index) => (
+            <figure className="review-card" key={index}>
               <blockquote>
                 <span className="review-stars" aria-hidden="true">
                   ★★★★★
@@ -48,10 +50,12 @@ export default function Reviews() {
                 <span className="visually-hidden">5 out of 5 stars.</span>
                 <span className="review-text">{review.text}</span>
               </blockquote>
-              <figcaption>
-                <span className="review-name">{review.name}</span>
-                <span className="review-when">{review.when}</span>
-              </figcaption>
+              {(review.name || review.when) && (
+                <figcaption>
+                  <span className="review-name">{review.name}</span>
+                  <span className="review-when">{review.when}</span>
+                </figcaption>
+              )}
             </figure>
           ))}
         </div>

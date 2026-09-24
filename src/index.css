@@ -22,11 +22,20 @@ html {
   scroll-behavior: smooth;
 }
 
+h1,
+h2,
+h3,
+.brand__name,
+.nav-mobile,
+.book-intro__phone {
+  font-variation-settings: "SOFT" 100;
+}
+
 body {
   margin: 0;
   background: var(--color-bg);
   color: var(--color-ink);
-  font: 400 16px/1.6 var(--font-body, "Jost", system-ui, sans-serif);
+  font: 400 16px/1.6 var(--font-body);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -101,7 +110,7 @@ textarea:focus-visible,
 }
 
 .section-label {
-  font: 600 12px/1 "Jost", sans-serif;
+  font: 600 12px/1 var(--font-body);
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--color-accentLabel);
@@ -109,9 +118,8 @@ textarea:focus-visible,
 
 .section-title {
   margin: 0;
-  font: 300 clamp(32px, 5vw, 48px) / 1.05 var(--font-display, "Josefin Sans", sans-serif);
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
+  font: 500 clamp(32px, 5vw, 48px) / 1.1 var(--font-display);
+  letter-spacing: -0.01em;
 }
 
 .btn {
@@ -123,7 +131,7 @@ textarea:focus-visible,
   border-radius: 999px;
   border: 0;
   text-decoration: none;
-  font: 500 16px "Jost", sans-serif;
+  font: 500 16px var(--font-body);
   cursor: pointer;
   transition: background-color 0.15s ease, color 0.15s ease;
 }
@@ -189,26 +197,38 @@ textarea:focus-visible,
   color: var(--color-ink);
 }
 .brand__mark {
-  width: 44px;
-  height: 48px;
+  width: 46px;
+  height: 46px;
   flex: none;
-  /* logo.webp is a tall image (icon stacked above wordmark); crop to just
-     the hexagon icon using background-position/size instead of shipping a
-     second image file. */
-  background: url("/assets/logo.webp") -34px 0 / 113px auto no-repeat;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--color-accent);
+  /* Close crop of the puppy from the square badge logo — the full badge is
+     unreadable at this size. */
+  background: url("/assets/logo-mark.webp") center / cover no-repeat;
 }
 .brand__name {
-  font: 300 17px/1.1 var(--font-display, "Josefin Sans", sans-serif);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  font: 600 20px/1.1 var(--font-display);
   white-space: nowrap;
+}
+/* Long salon names push the menu button off narrow phones, so swap in the
+   short name below 600px. */
+.brand__name--full {
+  display: none;
+}
+@media (min-width: 600px) {
+  .brand__name--full {
+    display: inline;
+  }
+  .brand__name--short {
+    display: none;
+  }
 }
 
 .nav-desktop {
   display: none;
   align-items: center;
   gap: 24px;
-  font: 500 15px "Jost", sans-serif;
+  font: 500 15px var(--font-body);
   white-space: nowrap;
 }
 .nav-desktop a {
@@ -249,9 +269,7 @@ textarea:focus-visible,
   display: flex;
   flex-direction: column;
   padding: 6px clamp(16px, 4vw, 40px) 20px;
-  font: 300 22px var(--font-display, "Josefin Sans", sans-serif);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font: 500 22px var(--font-display);
   border-top: 1px solid var(--color-border);
 }
 .nav-mobile a {
@@ -267,7 +285,7 @@ textarea:focus-visible,
   padding: 16px;
   border-radius: 999px;
   text-align: center;
-  font: 500 16px "Jost", sans-serif;
+  font: 500 16px var(--font-body);
   letter-spacing: 0;
   text-transform: none;
   border-bottom: none !important;
@@ -316,7 +334,7 @@ textarea:focus-visible,
   border: 1px solid var(--color-border);
   padding: 7px 13px;
   border-radius: 999px;
-  font: 500 13px "Jost", sans-serif;
+  font: 500 13px var(--font-body);
 }
 
 .status-dot {
@@ -328,9 +346,8 @@ textarea:focus-visible,
 
 .hero h1 {
   margin: 0;
-  font: 300 clamp(40px, 7vw, 72px) / 1.02 var(--font-display, "Josefin Sans", sans-serif);
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
+  font: 500 clamp(40px, 7vw, 72px) / 1.05 var(--font-display);
+  letter-spacing: -0.015em;
   text-wrap: balance;
 }
 .hero h1 em {
@@ -340,10 +357,15 @@ textarea:focus-visible,
 
 .hero__description {
   margin: 0;
-  font: 400 clamp(17px, 2vw, 19px) / 1.6 "Jost", sans-serif;
+  font: 400 clamp(17px, 2vw, 19px) / 1.6 var(--font-body);
   color: var(--color-inkSoft);
   max-width: 34em;
   text-wrap: pretty;
+}
+/* With the heading hidden, the description is the hero's lead line. */
+.hero--no-heading .hero__description {
+  font-size: clamp(20px, 2.4vw, 25px);
+  color: var(--color-ink);
 }
 
 .hero__actions {
@@ -355,33 +377,8 @@ textarea:focus-visible,
 
 .hero__fine-print {
   margin: 0;
-  font: 400 14px "Jost", sans-serif;
+  font: 400 14px var(--font-body);
   color: var(--color-inkMute);
-}
-
-.hero__art {
-  position: relative;
-  width: 100%;
-  max-width: 520px;
-  aspect-ratio: 1 / 1.02;
-  justify-self: center;
-}
-
-.hex {
-  position: absolute;
-  aspect-ratio: 0.866;
-  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
-}
-.hex--photo {
-  background-size: cover;
-  background-position: center;
-}
-.hex-outline {
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 36%;
-  overflow: visible;
 }
 
 /* ============================================================================
@@ -434,9 +431,7 @@ textarea:focus-visible,
 
 .service-card h3 {
   margin: 0 0 8px;
-  font: 400 24px/1.1 var(--font-display, "Josefin Sans", sans-serif);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  font: 600 24px/1.1 var(--font-display);
 }
 
 .service-row {
@@ -451,10 +446,10 @@ textarea:focus-visible,
   border-bottom: 0;
 }
 .service-row__name {
-  font: 400 17px/1.3 "Jost", sans-serif;
+  font: 400 17px/1.3 var(--font-body);
 }
 .service-row__price {
-  font: 500 14px "Jost", sans-serif;
+  font: 500 14px var(--font-body);
   color: var(--color-accentDeep);
   white-space: nowrap;
 }
@@ -525,7 +520,7 @@ textarea:focus-visible,
   border: 1px solid var(--color-borderStrong);
   background: var(--color-surface);
   cursor: pointer;
-  font: 400 20px "Jost", sans-serif;
+  font: 400 20px var(--font-body);
   color: var(--color-ink);
 }
 .review-arrow:hover {
@@ -565,12 +560,12 @@ textarea:focus-visible,
   gap: 14px;
 }
 .review-stars {
-  font: 400 16px "Jost", sans-serif;
+  font: 400 16px var(--font-body);
   color: var(--color-accentStrong);
   letter-spacing: 0.12em;
 }
 .review-text {
-  font: 400 16px/1.6 "Jost", sans-serif;
+  font: 400 16px/1.6 var(--font-body);
   text-wrap: pretty;
 }
 .review-card figcaption {
@@ -582,10 +577,10 @@ textarea:focus-visible,
   padding-top: 14px;
 }
 .review-name {
-  font: 500 15px "Jost", sans-serif;
+  font: 500 15px var(--font-body);
 }
 .review-when {
-  font: 400 13px "Jost", sans-serif;
+  font: 400 13px var(--font-body);
   color: var(--color-inkMute);
 }
 
@@ -617,15 +612,14 @@ textarea:focus-visible,
 }
 .book-intro p {
   margin: 0;
-  font: 400 16px/1.6 "Jost", sans-serif;
+  font: 400 16px/1.6 var(--font-body);
   color: #cfc7ba;
   max-width: 28em;
 }
 .book-intro__phone {
-  font: 300 28px var(--font-display, "Josefin Sans", sans-serif);
+  font: 500 28px var(--font-display);
   color: var(--color-accent);
   text-decoration: none;
-  letter-spacing: 0.04em;
 }
 .book-intro__phone:hover,
 .book-intro__phone:focus-visible {
@@ -653,7 +647,7 @@ textarea:focus-visible,
   display: flex;
   flex-direction: column;
   gap: 6px;
-  font: 500 14px "Jost", sans-serif;
+  font: 500 14px var(--font-body);
 }
 
 .field-label input,
@@ -664,7 +658,7 @@ textarea:focus-visible,
   border-radius: 12px;
   border: 1px solid var(--color-borderStrong);
   background: var(--color-surface);
-  font: 400 16px "Jost", sans-serif;
+  font: 400 16px var(--font-body);
   color: var(--color-ink);
 }
 .field-label input:focus-visible,
@@ -684,7 +678,7 @@ textarea:focus-visible,
 }
 
 .field-error {
-  font: 400 13px "Jost", sans-serif;
+  font: 400 13px var(--font-body);
   color: var(--color-error);
   min-height: 1em;
 }
@@ -695,7 +689,7 @@ textarea:focus-visible,
   gap: 8px;
 }
 .toggle-group__label {
-  font: 500 14px "Jost", sans-serif;
+  font: 500 14px var(--font-body);
 }
 .toggle-group__row {
   display: grid;
@@ -706,7 +700,7 @@ textarea:focus-visible,
   min-height: 50px;
   border-radius: 14px;
   cursor: pointer;
-  font: 500 16px "Jost", sans-serif;
+  font: 500 16px var(--font-body);
   border: 1px solid var(--color-borderStrong);
   background: var(--color-surface);
   color: var(--color-ink);
@@ -740,10 +734,10 @@ textarea:focus-visible,
   color: var(--color-onDark);
 }
 .size-btn__label {
-  font: 500 15px "Jost", sans-serif;
+  font: 500 15px var(--font-body);
 }
 .size-btn__sub {
-  font: 400 12px "Jost", sans-serif;
+  font: 400 12px var(--font-body);
 }
 
 .chip-group {
@@ -756,7 +750,7 @@ textarea:focus-visible,
   padding: 0 14px;
   border-radius: 999px;
   cursor: pointer;
-  font: 400 14px "Jost", sans-serif;
+  font: 400 14px var(--font-body);
   background: var(--color-surface);
   color: var(--color-ink);
   border: 1px solid var(--color-borderStrong);
@@ -773,7 +767,7 @@ textarea:focus-visible,
 }
 
 .form-note {
-  font: 400 13px/1.5 "Jost", sans-serif;
+  font: 400 13px/1.5 var(--font-body);
   color: var(--color-inkMute);
   text-align: center;
 }
@@ -790,7 +784,7 @@ textarea:focus-visible,
   padding: 18px;
 }
 .desktop-send__phone {
-  font: 500 18px "Jost", sans-serif;
+  font: 500 18px var(--font-body);
 }
 .copy-btn {
   align-self: flex-start;
@@ -802,12 +796,11 @@ textarea:focus-visible,
 
 .confirmation-card h3 {
   margin: 0;
-  font: 300 32px/1.1 var(--font-display, "Josefin Sans", sans-serif);
-  text-transform: uppercase;
+  font: 500 32px/1.1 var(--font-display);
 }
 .confirmation-card p {
   margin: 0;
-  font: 400 16px/1.6 "Jost", sans-serif;
+  font: 400 16px/1.6 var(--font-body);
   color: var(--color-inkSoft);
 }
 .confirmation-card pre {
@@ -817,7 +810,7 @@ textarea:focus-visible,
   border: 1px solid var(--color-border);
   border-radius: 14px;
   padding: 16px;
-  font: 400 14px/1.55 "Jost", sans-serif;
+  font: 400 14px/1.55 var(--font-body);
 }
 .confirmation-actions {
   display: grid;
@@ -833,7 +826,7 @@ textarea:focus-visible,
   border: 0;
   padding: 8px 0;
   cursor: pointer;
-  font: 500 15px "Jost", sans-serif;
+  font: 500 15px var(--font-body);
   color: var(--color-accentDeep);
   text-decoration: underline;
 }
@@ -866,7 +859,7 @@ textarea:focus-visible,
   justify-content: space-between;
   padding: 12px 14px;
   border-radius: 12px;
-  font: 400 16px "Jost", sans-serif;
+  font: 400 16px var(--font-body);
 }
 .hours-row--today {
   background: var(--color-highlight);
@@ -880,7 +873,7 @@ textarea:focus-visible,
   display: flex;
   flex-direction: column;
   gap: 6px;
-  font: 400 16px/1.55 "Jost", sans-serif;
+  font: 400 16px/1.55 var(--font-body);
 }
 .visit-contact a {
   text-decoration: none;
@@ -923,14 +916,14 @@ textarea:focus-visible,
   gap: 24px;
 }
 .site-footer__logo {
-  width: 200px;
+  width: 160px;
   height: auto;
 }
 .site-footer__meta {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  font: 400 14px/1.5 "Jost", sans-serif;
+  font: 400 14px/1.5 var(--font-body);
   color: var(--color-inkMute);
 }
 
@@ -998,6 +991,6 @@ textarea:focus-visible,
   border: 0;
   background: var(--color-bg);
   color: var(--color-ink);
-  font: 400 22px "Jost", sans-serif;
+  font: 400 22px var(--font-body);
   cursor: pointer;
 }

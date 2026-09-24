@@ -8,68 +8,70 @@
 // ============================================================================
 
 export const salon = {
-  name: "Your Salon Name",
-  shortName: "Your Salon",
+  name: "One Paw at a Time Grooming",
+  shortName: "One Paw at a Time",
 
-  // Used in the hero heading as: "Pet grooming {highlight} {city}"
-  heroKicker: "Pet grooming",
+  // Used in the hero heading as: "{kicker} {highlight} {city}"
+  heroKicker: "Dog grooming",
   heroHighlight: "in",
-  heroCity: "Your City",
+  heroCity: "Menifee",
+  // false keeps the heading for search engines and screen readers but hides
+  // it visually, so the hero opens straight into the description.
+  showHeroHeading: false,
 
-  tagline: "Dogs & cats · Your City, ST",
+  tagline: "One-on-one grooming · Menifee, CA",
 
   description:
-    "Add a short introduction here — what makes your grooming salon different, which pets you welcome, and why new clients should book with you.",
+    "One-on-one dog groomer in a quiet, home-based salon. I specialize in a low-stress experience with no cages or kennels. Your pup will have the same groomer every time, with quality shampoos, nail care and ear cleaning included with every groom.",
 
-  // E.164 format — used for tel: / sms: links. +1 555 555 0100 is a reserved
-  // fictional number block, safe to leave in place until you add a real one.
-  phone: "+15555550100",
-  phoneDisplay: "(555) 555-0100",
+  // E.164 format — used for tel: / sms: links.
+  phone: "+19515650191",
+  phoneDisplay: "(951) 565-0191",
 
   email: "", // leave blank to hide the "send by email" fallback link
 
   address: {
-    line1: "123 Main Street",
-    city: "Your City",
-    state: "ST",
-    zip: "00000",
+    line1: "28350 Shutes Cir",
+    city: "Menifee",
+    state: "CA",
+    zip: "92584",
   },
 
   // Google Maps embed + link query. Kept separate from the address object
   // so you can hand-tune the query string without reformatting the address.
-  mapsQuery: "123 Main Street, Your City, ST 00000",
+  mapsQuery: "28350 Shutes Cir, Menifee, CA 92584",
 
   // 0 = Sunday ... 6 = Saturday, matching Date#getDay().
   hours: [
-    { day: "Sunday", open: null, close: null },
+    { day: "Sunday", open: "9:00 am", close: "5:00 pm" },
     { day: "Monday", open: "9:00 am", close: "5:00 pm" },
     { day: "Tuesday", open: "9:00 am", close: "5:00 pm" },
     { day: "Wednesday", open: "9:00 am", close: "5:00 pm" },
     { day: "Thursday", open: "9:00 am", close: "5:00 pm" },
     { day: "Friday", open: "9:00 am", close: "5:00 pm" },
-    { day: "Saturday", open: "9:00 am", close: "2:00 pm" },
+    { day: "Saturday", open: "9:00 am", close: "5:00 pm" },
   ],
-  hoursSummary: "Mon–Fri, 9am–5pm · Sat 9am–2pm",
+  hoursSummary: "Open daily, 9am–5pm",
 
-  // Toggle to show/hide "from $X" price labels next to each service.
-  // Prices below are placeholder sample values — replace with your own.
+  // Toggle to show/hide "from $X" price labels next to each service. Add a
+  // `price` to each service below before turning this on.
   showPrices: false,
 
+  // Keyed by species — the booking form only offers a Dog/Cat choice when
+  // more than one species is listed. On the Services section, items are
+  // grouped into cards by `group` (falling back to the species name).
   services: {
     dog: [
-      { name: "Full service grooming", price: 80 },
-      { name: "Bathing and blow dry", price: 40 },
-      { name: "Nail trimming", price: 15 },
-      { name: "Ear cleaning", price: 10 },
-      { name: "Teeth brushing", price: 10 },
-      { name: "Anal gland expression", price: 15 },
-      { name: "Flea and tick treatment", price: 20 },
-    ],
-    cat: [
-      { name: "Cat grooming", price: 65 },
-      { name: "Cat bathing", price: 50 },
-      { name: "Cat nail trimming", price: 15 },
-      { name: "Cat ear cleaning", price: 10 },
+      { name: "Full service grooming", group: "Grooming" },
+      { name: "Grooming and styling", group: "Grooming" },
+      { name: "Bathing and blow dry", group: "Grooming" },
+      { name: "Nail trimming", group: "Grooming" },
+      { name: "Ear cleaning", group: "Grooming" },
+      { name: "Teeth brushing", group: "Grooming" },
+      { name: "Anal gland expression", group: "Grooming" },
+      { name: "Flea and tick treatment", group: "Grooming" },
+      { name: "Pet-safe creative color", group: "Creative color" },
+      { name: "Pet-safe nail color", group: "Creative color" },
     ],
   },
 
@@ -81,101 +83,55 @@ export const salon = {
       ["Large", "50–90 lb"],
       ["XL", "90+ lb"],
     ],
-    cat: [
-      ["Small", "under 8 lb"],
-      ["Medium", "8–12 lb"],
-      ["Large", "12+ lb"],
-    ],
   },
 
-  // Sample gallery — swap these files in /public/assets and update the alt
-  // text to describe each real photo.
+  // Shown in the Gallery section in this order.
   gallery: [
-    { src: "/assets/p5.webp", alt: "Sample gallery photo — replace with your own grooming photos" },
-    { src: "/assets/p1.webp", alt: "Sample gallery photo — replace with your own grooming photos" },
-    { src: "/assets/p3.webp", alt: "Sample gallery photo — replace with your own grooming photos" },
+    { src: "/assets/pyrenees-easter.webp", alt: "Fluffy white Great Pyrenees in a lilac bandana, smiling in a spring garden" },
+    { src: "/assets/terrier-bandana.webp", alt: "Freshly groomed cream terrier mix wearing a blue bow-tie bandana" },
+    { src: "/assets/schnauzer-rainbow.webp", alt: "Groomed silver schnauzer relaxing in a rainbow bandana" },
+    { src: "/assets/maltese-flower-wall.webp", alt: "White Maltese mix with a fresh trim in front of a flower wall" },
+    { src: "/assets/before-after-bow.webp", alt: "Before and after: shaggy mixed-breed pup, then trimmed and tidy with a pink bow" },
   ],
 
-  // Sample reviews — fictional names and quotes. Replace with your own
-  // reviews (e.g. copied from Google) before publishing.
+  // Real reviews copied from Google. `name` and `when` are optional.
   reviews: [
     {
-      name: "Jordan P.",
-      when: "3 years ago",
-      text: "Wonderful experience from start to finish! The groomer was so patient with my pup and did an amazing job with the cut. Highly recommend!",
-    },
-    {
-      name: "Sam R.",
-      when: "a year ago",
-      text: "Such a great job on both of our pets! Very patient with them and takes the time to get every detail right. They also send lots of update photos during the appointment, which we love.",
-    },
-    {
-      name: "Taylor M.",
-      when: "a year ago",
-      text: "Great job with our almost one-year-old puppy. Pricing was reasonable and they were very patient with our hyper little guy.",
-    },
-    {
-      name: "Casey L.",
-      when: "2 years ago",
-      text: "An incredible groomer — my dog was completely comfortable the whole time. Loved getting text updates with cute photos throughout the appointment. Highly recommend!",
-    },
-    {
-      name: "Morgan T.",
-      when: "3 weeks ago",
-      text: "Did an amazing job on our dog and left him looking great. We'll definitely be returning customers!",
-    },
-    {
-      name: "Alex W.",
-      when: "2 years ago",
-      text: "We love bringing our dogs here — the team is so good with them, even with tricky coats and big personalities. Incredible work every time!",
-    },
-    {
-      name: "Riley M.",
-      when: "a year ago",
-      text: "I've been taking my dog here weekly and I'm so happy with how great they always look. Wouldn't go anywhere else.",
-    },
-    {
-      name: "Amanda P.",
-      when: "2 years ago",
-      text: "Always responds promptly and my pet leaves happier and looking better every time. Highly recommend!",
+      name: "",
+      when: "",
+      text: "Crystal did an amazing job grooming my dog! She was friendly, professional, and my pup came back looking and smelling great. You can tell she really cares about the dogs she works with. Highly recommend!",
     },
   ],
 
-  // Sample neutral palette — not tied to any brand. Applied at runtime as
-  // CSS custom properties (see src/main.jsx), so this object is the ONE
-  // place that defines the site's color palette. Swap these for your own
-  // brand colors; keep accentStrong/accentDeep/accentLabel dark enough to
-  // clear WCAG AA contrast against the light backgrounds they sit on.
+  // Pulled from the One Paw at a Time logo: blush pink, bubble teal and
+  // ribbon tan. accentStrong/accentDeep/accentLabel are deepened versions so
+  // text set in them clears WCAG AA against the light backgrounds.
   colors: {
-    bg: "#FAF6EF",
+    bg: "#FFF9F7",
     surface: "#FFFFFF",
-    surfaceAlt: "#F3EDE3",
-    ink: "#1D1B18",
-    inkSoft: "#4F4A43",
-    inkMute: "#6B655C",
-    border: "rgba(29,27,24,.1)",
-    borderStrong: "rgba(29,27,24,.18)",
-    accent: "#EFA73C",
-    accentHover: "#F3B657",
-    // Darkened slightly from the source design's #C98323 / #B06F14 so text
-    // set in these colors clears WCAG AA contrast against the cream/white
-    // backgrounds they sit on (large hero text needs 3:1, the small eyebrow
-    // labels need 4.5:1) — same hue, just a touch deeper.
-    accentStrong: "#B8741A",
-    accentDeep: "#9A5F0E",
-    accentLabel: "#8A5A10",
-    highlight: "#FDF1DC",
-    selection: "#F4D49B",
-    onDark: "#FAF6EF",
+    surfaceAlt: "#FCEFEC",
+    ink: "#2A2226",
+    inkSoft: "#554A4E",
+    inkMute: "#6E6266",
+    border: "rgba(42,34,38,.1)",
+    borderStrong: "rgba(42,34,38,.18)",
+    accent: "#F2A7A1",
+    accentHover: "#F5B9B4",
+    accentStrong: "#C0564F",
+    accentDeep: "#9E433D",
+    accentLabel: "#2F6C82",
+    highlight: "#DDEFF5",
+    selection: "#F7CDC9",
+    onDark: "#FFF9F7",
     error: "#B3261E",
     openDot: "#3E9B5A",
-    closedDot: "#C9A27A",
+    closedDot: "#D2B48C",
   },
 
   fonts: {
-    display: "'Josefin Sans', sans-serif",
-    body: "'Jost', system-ui, sans-serif",
+    display: "'Fraunces', Georgia, serif",
+    body: "'Nunito', system-ui, sans-serif",
     googleFontsHref:
-      "https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&family=Jost:wght@400;500;600&display=swap",
+      "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400..700,100&family=Nunito:wght@400;500;600;700&display=swap",
   },
 };
