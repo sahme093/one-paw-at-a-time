@@ -5,16 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!--
-      Title + description are hardcoded here (not pulled from src/config.js)
-      because index.html is read by browsers/crawlers before React ever runs.
-      If you reuse this site for a different salon, update these two tags
-      AND src/config.js so they stay in sync.
+      Title, description and the og:/twitter: link-preview tags are hardcoded
+      here (not pulled from src/config.js) because index.html is read by
+      browsers, crawlers and link-preview bots before React ever runs. If you
+      reuse this site for a different salon, update all of them AND
+      src/config.js so they stay in sync.
     -->
     <title>One Paw at a Time Grooming | Dog Grooming in Menifee, CA</title>
     <meta
       name="description"
       content="One Paw at a Time Grooming is a one-on-one, home-based dog groomer in Menifee, CA. Cage-free, low-stress grooming with the same groomer every visit, open daily 9am–5pm. Call (951) 565-0191."
     />
+
+    <!-- Link previews (iMessage, Facebook, Slack, etc.) read these. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="One Paw at a Time Grooming" />
+    <meta property="og:title" content="One Paw at a Time Grooming | Dog Grooming in Menifee, CA" />
+    <meta
+      property="og:description"
+      content="One-on-one, home-based dog grooming in Menifee, CA. Cage-free, low-stress, same groomer every visit. Call (951) 565-0191."
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="One Paw at a Time Grooming | Dog Grooming in Menifee, CA" />
 
     <link rel="icon" type="image/webp" href="/assets/logo-mark.webp" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
